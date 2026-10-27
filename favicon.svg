@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="Grønthus">
+<rect width="64" height="64" rx="14" fill="#2F6B4A"/>
+<path d="M32 13.52L51.46 29.08L51.46 50.48L12.54 50.48L12.54 29.08Z" fill="none" stroke="#FFFFFF" stroke-width="3.40" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M32 48.54L32 33.95" fill="none" stroke="#FFFFFF" stroke-width="2.43" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M32 41.73C24.22 41.73 20.81 37.35 20.81 31.51C27.62 31.51 32 35.4 32 41.73Z" fill="#BFE0CB"/>
+<path d="M32 36.86C39.78 36.86 43.67 32.49 43.67 26.16C36.38 26.16 32 30.05 32 36.86Z" fill="#FFFFFF"/>
+</svg>

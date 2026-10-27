@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Grønthus</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#2F6B4A">
+<style>
+:root{--bg:#F4F7F2;--card:#fff;--ink:#17261C;--mut:#4A5A50;--g:#2F6B4A;--on:#fff;--gl:#DCE9DF;--wb:#FBE9E1;--wt:#8A3410;--line:#C5D3C9;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121A15;--card:#1B261F;--ink:#E8F0EA;--mut:#A9BAAE;--g:#6FBF8E;--on:#0E1A12;--gl:#24382B;--wb:#3A2218;--wt:#F2B79B;--line:#2C3B31}}
+:root[data-theme="dark"]{--bg:#121A15;--card:#1B261F;--ink:#E8F0EA;--mut:#A9BAAE;--g:#6FBF8E;--on:#0E1A12;--gl:#24382B;--wb:#3A2218;--wt:#F2B79B;--line:#2C3B31}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif}
+#app{max-width:520px;margin:0 auto;padding:20px 16px 110px}
+h1{margin:8px 0 4px;font-size:28px}.brand{font-weight:700;font-size:20px;color:var(--g);letter-spacing:.01em}h2{font-size:18px;margin:0}
+.mut{color:var(--mut);font-size:14px}
+.card{background:var(--card);border-radius:16px;padding:16px;margin:12px 0;display:flex;flex-direction:column;gap:8px;border:1px solid var(--line)}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.warn{background:var(--wb);color:var(--wt);border-radius:12px;padding:10px 12px;font-weight:600;font-size:14px}
+.ok{background:var(--gl);border-radius:12px;padding:10px 12px;font-size:14px}
+.due{background:var(--g);color:var(--on);border-radius:16px;padding:16px;margin:12px 0;font-weight:700;font-size:17px}
+button,select,input[type=search],input[type=email],input[type=password],input[type=date]{font:inherit;min-height:44px}
+.btn{border:0;border-radius:12px;background:var(--g);color:var(--on);font-weight:700;padding:0 16px;cursor:pointer}
+.btn2{border:2px solid var(--g);border-radius:12px;background:none;color:var(--g);font-weight:700;padding:0 16px;cursor:pointer}
+.lnk{border:0;background:none;color:var(--mut);text-decoration:underline;cursor:pointer;padding:0 8px}
+select,input[type=search],input[type=email],input[type=password],input[type=date]{width:100%;border:2px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);padding:0 12px}
+label{font-weight:700;display:flex;flex-direction:column;gap:6px;font-size:14px}
+label.chk{flex-direction:row;align-items:center;gap:12px;min-height:44px;font-size:16px}
+input[type=checkbox]{width:24px;height:24px;accent-color:var(--g)}
+.pick{display:flex;justify-content:space-between;align-items:center;width:100%;min-height:52px;text-align:left;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:0 14px;margin:6px 0;cursor:pointer;font-size:16px}
+nav{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);display:flex;justify-content:center;padding:6px 8px calc(8px + env(safe-area-inset-bottom,0px))}
+nav div{display:flex;max-width:520px;width:100%;gap:4px}
+nav button{flex:1;min-height:52px;border:0;background:none;color:var(--mut);font-weight:600;font-size:14px;border-radius:12px;cursor:pointer}
+nav button[aria-current=page]{color:var(--g);background:var(--gl);font-weight:700}
+details{background:var(--gl);border-radius:12px;padding:0 12px}summary{min-height:44px;display:flex;align-items:center;font-weight:700;cursor:pointer}details p{margin:6px 0 10px;font-size:15px}
+.fig{display:block;width:100%;max-width:340px;margin:8px 0;background:var(--card);border-radius:12px}.fig .g{fill:none;stroke:var(--g);stroke-width:3;stroke-linecap:round}.fig .gh{opacity:.35}.fig .lf{fill:var(--g);opacity:.55}.fig .pt{fill:none;stroke:var(--mut);stroke-width:2}.fig .nd{fill:var(--mut)}.fig .br{fill:none;stroke:#9A7B4F;stroke-width:3;stroke-linecap:round}.fig .cut{stroke:var(--wt);stroke-width:2.5;stroke-dasharray:5 3}.fig .ct{fill:var(--wt);font:700 12px system-ui,sans-serif}.fig .tx{fill:var(--ink);font:12px system-ui,sans-serif}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin:12px 0}.cw{text-align:center;font-size:12px;color:var(--mut);font-weight:700}.cd{min-height:48px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:inherit;font-size:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;padding:0}.cd.td{border:2px solid var(--g)}.cd.sel{background:var(--g);color:var(--on)}.cd .dt{font-size:11px;font-weight:700;color:var(--g)}.cd.sel .dt{color:var(--on)}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<nav><div>
+<button data-go="planter">Mine planter</button>
+<button data-go="kalender">Kalender</button>
+<button data-go="tilfoej">Tilføj</button>
+<button data-go="hus">Profil</button>
+</div></nav>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script>
+var C={
+tr:["Klip lange eller skæve skud tilbage lige over en bladknude. Fjern gule blade helt ved stilken.","Hvert 2. år i marts–april i en potte 2–3 cm bredere med luftig plantejord.","Flydende plantegødning hver 2. uge fra april til september. Ingen om vinteren."],
+fi:["Fjern døde blade. Klip toppen af for at få den til at forgrene sig.","Hvert 2.–3. år i foråret. Den trives faktisk bedst lidt trangt.","Plantegødning hver 3. uge i vækstsæsonen, ingen om vinteren."],
+su:["Skal normalt ikke klippes. Fjern kun visne blade ved roden.","Hvert 2.–3. år i foråret, i kaktusjord og en potte med drænhul.","Kaktusgødning 1–2 gange i sommerhalvåret, ellers ingen."],
+pa:["Klip kun helt brune blade af, og lad de grønne blive. Klip aldrig toppen.","Hvert 2.–3. år i foråret. Palmer kan ikke lide at få rødderne forstyrret.","Plantegødning hver 3. uge fra april til september."],
+bg:["Klip visne blade ned ved jorden. Nye kommer af sig selv.","Hvert år i foråret, eller når rødderne fylder potten.","Svag plantegødning hver 3. uge fra april til september."],
+ca:["Klip gamle eller beskadigede blade af ved stilken.","Hvert 1.–2. år i foråret i let, fugtig plantejord.","Plantegødning på halv styrke hver 3. uge i sommerhalvåret."],
+hg:["Klip skud tilbage for at få en busket plante. Stiklinger kan sættes i vand.","Hvert 2. år i foråret, eller når rødderne kommer ud af bunden.","Plantegødning hver 2.–3. uge fra april til september."],
+bl:["Fjern visne blomster og gule blade, så den blomstrer videre.","Hvert år i foråret, eller når blomstringen er slut.","Blomstergødning hver 2. uge, mens den blomstrer."],
+or:["Klip den afblomstrede stilk af over det andet øje, eller helt ned, hvis den er brun.","Hvert 2.–3. år efter blomstring, i orkidébark. Aldrig i almindelig jord.","Svag orkidégødning ved hver 2.–3. vanding i vækstperioden."],
+br:["Klip den visne blomsterstand af. Moderplanten dør langsomt efter blomstring.","Skal sjældent omplantes. Sæt de små skud i jord, når de er et par cm høje.","Svag gødning i rosetten. Ofte ikke nødvendig."],
+st:["Klip visne blomster af løbende. Skær ned til 5–10 cm over jorden sidst på efteråret eller tidligt forår.","Del planten hvert 3.–5. år i foråret eller efteråret, så den bliver ved med at blomstre.","Kompost eller langsomtvirkende gødning i foråret."],
+ro:["Klip i marts–april, og fjern døde, syge og krydsende grene.","Flyt kun i hvileperioden, november–marts.","Gødning til buske i april og igen efter første blomstring."],
+fr:["Klip bærbuske og frugttræer i vinterhvilen (januar–marts). Fjern gamle grene, så der kommer lys ind.","Flyt kun i vinterhvilen.","Kompost eller bærgødning i foråret."],
+gv:["Fjern gamle og syge blade løbende. Høst ofte, så den bliver ved med at give.","Sås eller plantes ud hvert år. Skift plads fra år til år.","Tomatgødning hver uge, når der sidder blomster og frugt."],
+kr:["Nip toppen af ofte, så den buskes. Lad den ikke sætte blomster.","Del flerårige urter hvert 2.–3. år. Etårige sås igen hvert forår.","Spar på gødningen. Urterne smager bedst, når de ikke fedes."],
+lø:["Lad bladene visne helt ned, før du klipper dem af.","Tag op og del, når de bliver for tætte, efter at bladene er visnet.","Gødning efter blomstring."]
+};
+var P=[
+["Monstera","Monstera deliciosa",9,1,"Middel","Tåler skygge, men trives bedst i lyst, indirekte lys. Lad jorden tørre lidt mellem hver vanding.","tr"],
+["Gummitræ","Ficus elastica",10,1,"Middel","Vil have et fast sted og trives ikke med træk. Tør bladene af en gang imellem.","fi",{k:"Klip toppen for at få den til at forgrene sig. Safterne er klæbrige og kan irritere huden, så brug handsker."}],
+["Fredslilje","Spathiphyllum",7,1,"Lavt til middel","Hænger med bladene, når den mangler vand, og retter sig hurtigt igen.","ca"],
+["Svigermors tunge","Sansevieria",18,1,"Lavt til højt","Meget tålsom. Den dør oftest af for meget vand.","su"],
+["Pengetræ","Crassula ovata",18,1,"Højt","Vil have meget lys. Vand sparsomt, især om vinteren.","su",{k:"Klip grene tilbage for at forme den. Stiklinger rodsætter nemt."}],
+["Aloe vera","Aloe vera",18,1,"Højt","Kræver gode lysforhold og meget veldrænet jord.","su"],
+["Gyldenranke","Epipremnum aureum",8,1,"Lavt til middel","En af de nemmeste. Kan hænge eller klatre.","hg"],
+["ZZ-plante","Zamioculcas zamiifolia",21,1,"Lavt til middel","Gemmer vand i knoldene. Vand hellere for sjældent end for ofte.","su"],
+["Grønlilje","Chlorophytum comosum",8,0,"Middel","Danner små kopier af sig selv, som kan sættes i jord.","hg"],
+["Calathea","Calathea",7,0,"Middel","Kan lide fugtig luft og kalkfattigt vand. Undgå direkte sol.","ca"],
+["Kinesisk pengeplante","Pilea peperomioides",9,0,"Middel til højt","Drej potten en gang om ugen, så den vokser lige.","tr"],
+["Peperomia","Peperomia",12,0,"Middel","Kompakt og nem. Tåler en tør periode bedre end for meget vand.","tr"],
+["Boston bregne","Nephrolepis exaltata",5,0,"Middel","Vil have jævnt fugtig jord og høj luftfugtighed.","bg"],
+["Sommerfugleorkidé","Phalaenopsis",10,0,"Middel","Vand ved at dyppe potten, og lad den dryppe af.","or"],
+["Haworthia","Haworthia",18,0,"Middel til højt","Lille sukkulent, der klarer sig med meget lidt vand.","su"],
+["Julekaktus","Schlumbergera",12,0,"Middel","Blomstrer bedst, hvis den står køligt og mørkt om aftenen i efteråret.","su",{k:"Drej leddene af i stedet for at klippe. De kan sættes i jord som stiklinger.",o:"Hvert 2.–3. år efter blomstring. Den vil gerne stå trangt.",g:"Gødning fra forår til august. Stop i september, så den sætter knopper."}],
+["Hoya","Hoya carnosa",14,0,"Middel til højt","Blomstrer først, når den er moden. Flyt den helst ikke.","hg",{k:"Klip ikke de gamle blomsterstilke af, de blomstrer igen. Klip kun lange, tynde skud."}],
+["Arekapalme","Dypsis lutescens",8,0,"Middel til højt","Vil have jævn fugt, men ikke våde rødder.","pa"],
+["Birkefigen","Ficus benjamina",10,1,"Middel til højt","Hader at blive flyttet og taber blade ved ændringer i lys og temperatur.","fi"],
+["Philodendron","Philodendron scandens",9,1,"Lavt til middel","Klatrer eller hænger. Tåler skygge og glemsom vanding.","tr"],
+["Drageblod","Dracaena",12,1,"Lavt til middel","Brune bladspidser skyldes ofte kalk i vandet eller for tør jord.","tr",{k:"Klip toppen for at få den til at forgrene sig. Brune bladspidser kan klippes af."}],
+["Yucca","Yucca elephantipes",14,1,"Højt","Vil have meget lys og kan tåle en tør periode.","su",{k:"Klip stammen over en bladring for at få den til at forgrene sig."}],
+["Efeu","Hedera helix",7,1,"Middel","Foretrækker køligt. Spindemider kommer let i tør luft.","hg"],
+["Elefantøre","Alocasia",7,1,"Middel til højt","Taber blade om vinteren. Vand mindre, når den hviler.","tr"],
+["Syngonium","Syngonium podophyllum",8,1,"Lavt til middel","Kan klatre eller hænge. Klip skud tilbage for en busket plante.","hg"],
+["Aglaonema","Aglaonema",10,1,"Lavt til middel","Meget tålsom og velegnet til mørkere rum.","tr"],
+["Skærmaralia","Schefflera",9,1,"Middel","Taber blade, hvis jorden er for våd eller for tør.","tr"],
+["Dieffenbachia","Dieffenbachia",8,1,"Middel","Undgå træk og kolde vinduer.","tr",{k:"Klip toppen, hvis den bliver for høj. Brug handsker, for saften kan irritere hud og slimhinder."}],
+["Begonia","Begonia",7,1,"Middel til højt","Vand ikke på bladene, så undgår du meldug.","bl"],
+["Kalanchoe","Kalanchoe blossfeldiana",12,1,"Højt","Blomstrer igen, hvis den får korte dage i 6 uger.","su",{k:"Fjern visne blomster, og klip stilkene ned, når blomstringen er slut."}],
+["Tradescantia","Tradescantia zebrina",7,1,"Middel til højt","Vokser hurtigt. Klip ofte for at holde den tæt.","hg"],
+["Paradisfugl","Strelitzia reginae",8,1,"Højt","Blomstrer først efter flere år og kræver meget lys.","tr"],
+["Cyclamen","Cyclamen persicum",4,1,"Lyst og køligt","Vil have køligt. Vand fra bunden, så knolden ikke bliver våd.","bl",{k:"Drej visne blomster og blade af helt nede ved knolden.",o:"Omplantes sjældent. Efter blomstring hviler den, og du kan sætte knolden i frisk jord.",g:"Blomstergødning hver 2. uge under blomstring."}],
+["Julestjerne","Euphorbia pulcherrima",6,1,"Lyst","Tåler ikke træk eller kulde. Saften kan irritere huden.","bl",{k:"Skær ned til 10 cm efter blomstring, hvis du vil beholde den.",o:"Efter nedskæring i foråret, i frisk jord.",g:"Gødning fra maj til oktober."}],
+["Amaryllis","Hippeastrum",7,1,"Lyst","Vand sparsomt, indtil bladene kommer.","bl",{k:"Klip den afblomstrede stilk af, men lad bladene stå, så løget samler kræfter.",o:"Hvert 2.–3. år efter hvile. Løget skal stå halvt over jorden.",g:"Gødning fra blomstring til august. Lad den hvile mørkt i efteråret."}],
+["Fiddle-leaf fig","Ficus lyrata",9,1,"Højt","Hader træk og flytning. Drej den lidt hver måned.","fi"],
+["Afrikansk violet","Saintpaulia",6,0,"Middel","Vand fra bunden og undgå vand på bladene.","bl"],
+["Maranta","Maranta leuconeura",6,0,"Middel","Folder bladene sammen om natten. Vil have fugtig luft.","ca"],
+["Ctenanthe","Ctenanthe",6,0,"Middel","Ligner Calathea og har samme behov for fugtig luft.","ca"],
+["Stromanthe","Stromanthe sanguinea",6,0,"Middel","Vil have jævn fugt og kalkfattigt vand.","ca"],
+["Zebraplante","Aphelandra squarrosa",6,0,"Middel","Sart og vil have høj luftfugtighed.","bl"],
+["Aluminiumsplante","Pilea cadierei",7,0,"Middel","Klip toppen af for en tættere plante.","tr"],
+["Fittonia","Fittonia albivenis",5,0,"Middel","Besvimer, hvis jorden bliver tør. Retter sig hurtigt igen.","ca"],
+["Rhipsalis","Rhipsalis",12,0,"Middel","Sukkulent med hængende skud. Tåler ikke at stå vådt.","su"],
+["Fuglerede-bregne","Asplenium nidus",6,0,"Middel","Hæld ikke vand i midten af rosetten.","bg"],
+["Bjergpalme","Chamaedorea elegans",8,0,"Lavt til middel","Tåler skygge. En af de nemmeste palmer.","pa"],
+["Kentiapalme","Howea forsteriana",9,0,"Middel","Langsomtvoksende og meget tålsom.","pa"],
+["Kaktus","Mammillaria",21,0,"Højt","Vil have meget lys og næsten ingen vand om vinteren.","su"],
+["Echeveria","Echeveria",18,0,"Højt","Roset-sukkulent. Vand aldrig i rosetten.","su"],
+["Guzmania","Guzmania",10,0,"Middel","Hæld vand i rosetten, og skift det ofte.","br"],
+["Monstera adansonii","Monstera adansonii",8,1,"Middel","Mindre og mere klatrende end almindelig Monstera. Giv den en pind at klatre op ad.","tr"],
+["Asparges-bregne","Asparagus setaceus",10,1,"Middel","Er ikke en rigtig bregne. Taber nåle, hvis luften er for tør.","hg"],
+["Sagopalme","Cycas revoluta",14,1,"Højt","Meget giftig for hunde og katte, især frøene. Hold den helt væk fra dyr. Vokser meget langsomt.","pa"],
+["Afrikansk mælketræ","Euphorbia trigona",18,1,"Højt","Sukkulent med mælkesaft, som kan irritere hud og øjne.","su",{k:"Klip sjældent. Brug handsker og beskyt øjnene, for mælkesaften er irriterende."}],
+["Pachira","Pachira aquatica",10,0,"Middel til højt","Pengetræ med flettet stamme. Tåler ikke våde rødder.","fi"],
+["Anthurium","Anthurium andraeanum",7,1,"Middel til højt","Vil have fugtig luft og lyse, men ikke solrige, vinduer.","bl"],
+["Caladium","Caladium",6,1,"Middel","Går i hvile om vinteren. Vand næsten ikke, når bladene visner.","bl"],
+["Clivia","Clivia miniata",12,1,"Middel","Blomstrer bedst efter en kølig, tør vinter.","bl"],
+["Hortensia","Hydrangea macrophylla",3,1,"Lyst","Vil have meget vand og kølige omgivelser.","bl"],
+["Pelargonium","Pelargonium",8,1,"Højt","Vil have meget lys og tåler, at jorden tørrer lidt mellem hver vanding.","bl",{k:"Klip visne blomster og lange skud af, så den buskes."}],
+["Kroton","Codiaeum variegatum",7,1,"Højt","Taber blade ved træk og kulde. Vil have meget lys for at beholde farverne.","tr"],
+["Agave","Agave",21,1,"Højt","Vil have meget lys og næsten ingen vand om vinteren.","su"],
+["Gasteria","Gasteria",18,0,"Middel til højt","Tålsom sukkulent, der også klarer sig i mindre lys.","su"],
+["Æselhale","Sedum morganianum",18,0,"Højt","Hængende sukkulent. Bladene falder let af, så rør den så lidt som muligt.","su"],
+["Oxalis","Oxalis triangularis",7,1,"Middel til højt","Går i hvile og kan tabe bladene. Vand mindre, så kommer de igen.","bl"],
+["Baby tears","Soleirolia soleirolii",5,0,"Middel","Lav og tæt tæppeplante. Må ikke tørre ud.","ca"],
+["Hjortehorn-bregne","Platycerium",7,0,"Middel","Vokser ofte på et bræt. Vand ved at dyppe hele planten.","bg"],
+["Hare foot fern","Davallia",6,0,"Middel","Har behårede rødder oven på jorden. Lad dem ligge frit.","bg"],
+["Hjertekæde","Ceropegia woodii",14,0,"Højt","Hængende plante med hjerteformede blade. Tåler ikke at stå vådt.","hg"],
+["Støbejernsplante","Aspidistra elatior",12,0,"Lavt","Næsten uslåelig. Tåler mørkt, køligt og glemsom vanding.","tr"],
+["Dadelpalme","Phoenix roebelenii",8,0,"Højt","Vil have meget lys. Skarpe torne i bladfoden.","pa"],
+["Paraplygræs","Cyperus alternifolius",4,0,"Middel til højt","Står gerne med vand i underskålen hele tiden.","ca"],
+["Basilikum","Ocimum basilicum",3,0,"Højt","Vil have meget lys og varme. Brug bladene løbende.","bl",{k:"Nip toppen af, så den buskes og ikke sætter blomster.",o:"Sås eller købes ny hvert år. Den er etårig indendørs.",g:"Svag gødning hver 2. uge i vækstsæsonen."}],
+["Citrontræ","Citrus limon",7,1,"Højt","Vil have sol og køligt om vinteren. Kan godt flyttes ud om sommeren.","fi",{k:"Klip let om foråret for at holde formen."}],
+["Kaffeplante","Coffea arabica",8,1,"Middel","Vil have jævn fugt og fugtig luft.","tr"],
+["Ananas","Ananas comosus",10,0,"Højt","Hæld vand i rosetten og lidt i jorden. Vil have varme.","br"],
+["Luftplante","Tillandsia",4,0,"Middel","Skal ikke i jord. Dyp den i vand en gang om ugen, og lad den tørre bagefter.","br",{o:"Skal ikke i jord. Sæt den på træ, sten eller i en skål."}],
+["Vriesea","Vriesea",10,0,"Middel","Hæld vand i rosetten, og skift det ofte.","br"],
+["Streptocarpus","Streptocarpus",6,0,"Middel","Vand fra bunden. Tåler ikke at blive våd på bladene.","bl"],
+["Jasmin","Jasminum polyanthum",7,0,"Lyst og køligt","Blomstrer bedst, hvis den står køligt om vinteren.","hg"],
+["Lavendel","Lavandula",6,1,"Sol","Vil have sol og tør, kalkrig jord. Vandes sjældent.","ro",{k:"Klip let efter blomstring i august, men ikke ned i det gamle træ.",g:"Skal ikke gødes. Den trives bedst på mager jord."},"u"],
+["Rose","Rosa",4,0,"Sol","Vil have sol, god jord og luft mellem grenene.","ro",null,"u"],
+["Hortensia (have)","Hydrangea",3,1,"Sol til halvskygge","Vil have jævn fugt og tåler ikke tørke.","ro",{k:"Klip først i det tidlige forår, og fjern kun de visne blomsterstande. Mange sorter blomstrer på sidste års skud."},"u"],
+["Pæon","Paeonia",5,1,"Sol","Plant ikke dybt. Blomstrer først, når den har stået i fred nogle år.","st",null,"u"],
+["Hosta","Hosta",4,1,"Skygge","Sneglene elsker den. Vil have jævn fugt og skygge.","st",null,"u"],
+["Solhat","Echinacea",6,0,"Sol","Tåler tørke, når den er etableret.","st",null,"u"],
+["Daglilje","Hemerocallis",5,1,"Sol til halvskygge","Meget giftig for katte. Hold den uden for deres rækkevidde.","st",null,"u"],
+["Dahlia","Dahlia",4,1,"Sol","Knoldene tages op og gemmes frostfrit om vinteren.","st",{k:"Fjern visne blomster løbende. Skær ned efter første frost, og tag knoldene op."},"u"],
+["Tulipan","Tulipa",5,1,"Sol","Løgene lægges i oktober–november. Giftige, især løgene.","lø",null,"u"],
+["Påskelilje","Narcissus",5,1,"Sol til halvskygge","Giftig, især løgene. Lægges i september–oktober.","lø",null,"u"],
+["Allium","Allium",6,1,"Sol","Prydløg. Lægges i efteråret.","lø",null,"u"],
+["Hyacint","Hyacinthus",5,1,"Sol","Løgene lægges i efteråret. Giftige, især løgene.","lø",null,"u"],
+["Petunia","Petunia",2,0,"Sol","Vil have meget vand og næring i potte.","st",{k:"Nip visne blomster og lange skud af løbende.",o:"Etårig. Købes eller sås nye hvert forår.",g:"Blomstergødning hver uge i sommerhalvåret."},"u"],
+["Stedmoderblomst","Viola",3,0,"Sol til halvskygge","Blomstrer forår og efterår. Tåler let frost.","st",{k:"Nip visne blomster af, så den blomstrer videre.",o:"Etårig eller toårig. Plantes ud hvert forår eller efterår."},"u"],
+["Tagetes","Tagetes",3,1,"Sol","Nem sommerblomst. Fjern visne blomster.","st",{k:"Nip visne blomster af løbende.",o:"Etårig. Sås eller købes ny hvert forår."},"u"],
+["Fingerbøl","Digitalis",5,1,"Sol til halvskygge","Meget giftig i alle dele, også for børn og dyr.","st",null,"u"],
+["Buksbom","Buxus",7,1,"Sol til halvskygge","Giftig. Rammes af buksbomhalvmøl i nogle år.","ro",{k:"Klip i maj–juni og igen i august–september, så den holder formen.",g:"Langsomtvirkende gødning i foråret."},"u"],
+["Thuja","Thuja",10,1,"Sol","Hækplante. Tåler ikke at tørre ud, mens den er ny.","ro",{k:"Klip let i juni og august. Klip aldrig ned i det gamle, bare træ.",g:"Langsomtvirkende gødning i foråret."},"u"],
+["Bambus","Fargesia",5,0,"Halvskygge","Vil have jævn fugt, især i potte.","st",{k:"Fjern døde og gamle strå ved jorden i foråret."},"u"],
+["Rododendron","Rhododendron",5,1,"Halvskygge","Meget giftig. Vil have sur jord og jævn fugt.","ro",{k:"Klip kun lidt, lige efter blomstring.",g:"Gødning til rododendron (sur jord) i foråret."},"u"],
+["Æbletræ","Malus domestica",10,1,"Sol","Kernerne og bladene er giftige i større mængder.","fr",null,"u"],
+["Blåbær","Vaccinium corymbosum",5,0,"Sol til halvskygge","Vil have sur jord og kalkfrit vand, helst regnvand.","fr",null,"u"],
+["Jordbær","Fragaria",3,0,"Sol","Vil have jævn fugt, især når der er bær.","fr",{k:"Fjern visne blade og de slyngskud, du ikke vil bruge.",o:"Udskift planterne hvert 3. år.",g:"Jordbærgødning efter høst og igen om foråret."},"u"],
+["Hindbær","Rubus idaeus",5,0,"Sol til halvskygge","Vil have jævn fugt og støtte til stænglerne.","fr",{k:"Klip de ældste skud ned til jorden efter høst, og lad de nye stå."},"u"],
+["Ribs","Ribes rubrum",6,0,"Sol til halvskygge","Nem bærbusk, der tåler køligt klima.","fr",null,"u"],
+["Timian","Thymus",7,0,"Sol","Vil have sol og dræning. Tåler tørke.","kr",null,"u"],
+["Rosmarin","Rosmarinus",8,0,"Sol","Tåler ikke hård frost. Tag potten ind eller dæk til om vinteren.","kr",null,"u"],
+["Persille","Petroselinum",4,1,"Sol til halvskygge","Toårig. Vil have jævn fugt.","kr",null,"u"],
+["Purløg","Allium schoenoprasum",4,1,"Sol til halvskygge","Flerårig og nem. Klip ofte for friske skud.","kr",{k:"Klip ned til 3–5 cm over jorden, så kommer der nye skud."},"u"],
+["Mynte","Mentha",3,1,"Halvskygge","Breder sig kraftigt. Hold den i en potte.","kr",null,"u"],
+["Salvie","Salvia officinalis",7,0,"Sol","Vil have sol og tør jord.","kr",null,"u"],
+["Citronmelisse","Melissa officinalis",4,0,"Sol til halvskygge","Breder sig let. Klip ofte.","kr",null,"u"],
+["Dild","Anethum graveolens",3,0,"Sol","Etårig. Sås flere gange gennem sommeren.","kr",{o:"Etårig. Sås direkte, den kan ikke lide at blive omplantet."},"u"],
+["Tomat","Solanum lycopersicum",2,1,"Fuld sol","Blade og stængler er giftige. Vand ved roden, ikke på bladene.","gv",{k:"Fjern sideskud i bladhjørnerne og de nederste gule blade."},"d"],
+["Agurk","Cucumis sativus",2,0,"Fuld sol","Vil have varme og meget vand. Giv den en snor at klatre op ad.","gv",null,"d"],
+["Peberfrugt","Capsicum annuum",3,0,"Fuld sol","Vil have varme. Frugterne bliver røde, hvis de får lov at hænge.","gv",null,"d"],
+["Chili","Capsicum",3,0,"Fuld sol","Brug handsker, når du plukker de stærke sorter.","gv",null,"d"],
+["Aubergine","Solanum melongena",3,1,"Fuld sol","Giftig i de grønne dele. Vil have meget varme.","gv",null,"d"],
+["Squash","Cucurbita pepo",3,0,"Fuld sol","Vil have meget plads, vand og næring.","gv",null,"d"],
+["Melon","Cucumis melo",3,0,"Fuld sol","Vil have varme og et net til de tunge frugter.","gv",null,"d"],
+["Salat","Lactuca sativa",2,0,"Sol til halvskygge","Tåler ikke varme. Sås løbende.","gv",{k:"Høst de ydre blade, så den bliver ved med at give.",o:"Sås eller plantes ud flere gange. Den går hurtigt i blomst i varme."},"d"],
+["Græskar","Cucurbita maxima",3,0,"Fuld sol","Vil have meget plads og vand.","gv",null,"d"],
+["Vindrue","Vitis vinifera",5,1,"Fuld sol","Druer er giftige for hunde. Klatrer op ad snor eller espalier.","fr",{k:"Klip kraftigt i vinterhvilen, og lad kun nogle få skud stå."},"d"],
+["Figen","Ficus carica",7,1,"Fuld sol","Vil have varme for at give frugt. Saften irriterer huden.","fr",{k:"Klip let i foråret. Brug handsker, for saften kan irritere huden."},"d"],
+["Oliventræ","Olea europaea",7,0,"Fuld sol","Tåler tørke. Skal stå frostfrit om vinteren.","fr",null,"d"],
+["Basilikum (drivhus)","Ocimum basilicum",2,0,"Fuld sol","Vil have varme. Nip toppen af ofte.","kr",null,"d"],
+["Kartoffel","Solanum tuberosum",3,1,"Sol","Grønne dele og knolde, der er blevet grønne, er giftige.","gv",{k:"Ingen klipning. Hyp jord op om stænglerne, når de er 20 cm høje.",o:"Sættes som læggekartofler om foråret.",g:"Kompost ved udplantning."},"d"]
+];
+var M=["januar","februar","marts","april","maj","juni","juli","august","september","oktober","november","december"];
+var VIND=[["Nord",1.25],["Øst",1],["Syd",.85],["Vest",1],["Intet vindue",1.6]];
+var AFST=[["Ved ruden",1],["Ca. 1 m",1.1],["2 m eller mere",1.3]];
+var S,tab="planter",draft=null,q="";
+function init(){return{plants:[],hus:{born:false,kat:false,hund:false,andre:false}}}
+try{S=JSON.parse(localStorage.getItem("sp")||"")||init()}catch(e){S=init()}
+function lsSave(){try{localStorage.setItem("sp",JSON.stringify(S))}catch(e){}}function save(){lsSave();if(U)pushSoon()}
+function sea(m){return(m>=10||m<=1)?1.6:(m==2||m==3||m==8||m==9)?1.25:1}
+function days(pid,vi,ai,lamp){var c=cat(pid),m=new Date().getMonth();if(c!='s')return Math.max(1,Math.round(P[pid][2]*sea2(c,m)*STED[vi][1]*POT[ai][1]));var f=sea(m)*VIND[vi][1]*AFST[ai][1]*(lamp?.85:1);return Math.max(2,Math.round(P[pid][2]*f))}
+function day0(s){var d=s?new Date(s):new Date();return new Date(d.getFullYear(),d.getMonth(),d.getDate())}
+function iso(d){return d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2)}
+function rel(p){var n=days(p.pid,p.vi,p.ai,p.lamp),t=day0(effLast(p));t.setDate(t.getDate()+n);var x=Math.round((t-day0())/864e5);return x}
+function when(x){return x<0?Math.abs(x)+" dage over tid":x==0?"Vand i dag":x==1?"Vand i morgen":"Om "+x+" dage"}
+function risk(pid){var h=S.hus,w=[];if(!P[pid][3])return"";if(h.born)w.push("små børn");if(h.kat)w.push("katte");if(h.hund)w.push("hunde");if(h.andre)w.push("andre dyr");return w.length?"Giftig. Kan være farlig for "+w.join(", ")+". Placér den uden for rækkevidde.":""}
+function care(i,o){var g=C[P[i][6]],x=P[i][7]||{};return"<details"+(o?" open":"")+"><summary>Pleje</summary><p><b>Klipning:</b> "+(x.k||g[0])+"</p>"+fig(i)+"<p><b>Omplantning:</b> "+(x.o||g[1])+"</p><p><b>Gødning:</b> "+(x.g||g[2])+"</p>"+(cat(i)!='s'?"<p class=\"mut\">Udendørs og i drivhus tæller regn og varme med. Tjek altid jorden med en finger, før du vander.</p>":"")+"</details>"}
+function opts(a,v){return a.map(function(o,i){return"<option value=\""+i+"\""+(i==v?" selected":"")+">"+o[0]+"</option>"}).join("")}
+function listHtml(){var r=P.map(function(p,i){return[p,i]}).filter(function(x){if(cat(x[1])!=tcat)return false;return x[0][0].toLowerCase().indexOf(q.toLowerCase())>-1||x[0][1].toLowerCase().indexOf(q.toLowerCase())>-1});r.sort(function(a,b){return a[0][0].localeCompare(b[0][0],'da')});return r.length?r.map(function(x){return"<button class=\"pick\" data-pick=\""+x[1]+"\"><span><b>"+x[0][0]+"</b><br><span class=\"mut\">"+x[0][1]+"</span></span><span class=\"mut\">"+(x[0][3]?"Giftig":"Ufarlig")+"</span></button>"}).join(""):"<p class=\"mut\">Ingen planter fundet. Prøv et andet navn.</p>"}
+function vPlanter(){
+ var due=S.plants.filter(function(p){return rel(p)<=0}).length;
+ var h="<div class=\"brand\">Grønthus <svg viewBox='0 0 100 100' width='22' height='22' aria-hidden='true' style='vertical-align:-3px;margin-left:2px'><path d='M50 12L90 44L90 88L10 88L10 44Z' fill='var(--gl)' stroke='var(--g)' stroke-width='8' stroke-linejoin='round'/><path d='M50 84L50 54' stroke='var(--g)' stroke-width='6' stroke-linecap='round'/><path d='M50 70C34 70 27 61 27 49C41 49 50 57 50 70Z' fill='var(--g)' opacity='.6'/><path d='M50 60C66 60 74 51 74 38C59 38 50 46 50 60Z' fill='var(--g)'/></svg></div><h1>Mine planter</h1><div class=\"mut\">"+new Date().getDate()+". "+M[new Date().getMonth()]+"</div>";
+ if(!S.plants.length)return h+"<div class=\"card\"><h2>Ingen planter endnu</h2><div class=\"mut\">Tryk på Tilføj, vælg en plante og fortæl, hvor den står. Så regner appen ud, hvor ofte den skal have vand.</div><button class=\"btn\" style=\"min-height:48px\" data-go=\"tilfoej\">Tilføj din første plante</button></div>";
+ h+="<div class=\"due\">"+(due?due+(due==1?" plante skal":" planter skal")+" have vand":"Ingen planter skal have vand i dag")+"</div>";
+ h+=wxStrip()+sortBar();S.plants.filter(function(p){return !S.f||cat(p.pid)==S.f}).sort(function(a,b){var n=P[a.pid][0].localeCompare(P[b.pid][0],'da'),r=rel(a)-rel(b);return S.sort=='vand'?(r||n):(n||r)}).forEach(function(p){var x=rel(p),w=risk(p.pid);
+  h+="<div class=\"card\"><div class=\"row\"><div><h2>"+P[p.pid][0]+"</h2><div class=\"mut\">"+loc(p)+"</div></div><b style=\"color:"+(x<=0?"var(--wt)":"var(--ink)")+"\">"+when(x)+"</b></div>"+
+  "<div class=\"mut\">Vand "+ev(days(p.pid,p.vi,p.ai,p.lamp))+" lige nu i "+M[new Date().getMonth()]+"</div>"+wxNote(p)+unkNote(p)+(w?"<div class=\"warn\">"+w+"</div>":"")+
+  care(p.pid)+"<div class=\"row\"><button class=\"btn\" style=\"min-height:44px\" data-wet=\""+p.id+"\">Vandet</button><button class=\"lnk\" data-del=\""+p.id+"\">Fjern</button></div></div>"});
+ return h}
+function vTilfoej(){
+ if(!draft)return"<h1>Tilføj plante</h1>"+catBar()+"<input type=\"search\" id=\"q\" placeholder=\"Søg på navn\" aria-label=\"Søg plante\" value=\""+q+"\"><div id=\"lst\">"+listHtml()+"</div>";
+ var d=draft,p=P[d.pid],w=risk(d.pid),n=days(d.pid,d.vi,d.ai,d.lamp);
+ return"<h1>"+p[0]+"</h1><div class=\"mut\">"+p[1]+"</div><div class=\"card\"><div class=\"mut\">Lys: "+p[4]+"</div><div>"+p[5]+"</div></div>"+care(d.pid,1)+(w?"<div class=\"warn\">"+w+"</div>":(p[3]?"<div class=\"ok\">Giftig for dyr og børn. Du har ikke angivet børn eller dyr under Husstand.</div>":"<div class=\"ok\">Ufarlig for katte, hunde og børn, hvis man ser bort fra mavebesvær ved indtagelse.</div>"))+
+ "<div class=\"card\">"+placeForm(d)+"</div>"+lastForm(d)+
+ "<div class=\"ok\"><b>Vand "+ev(n)+"</b> nu i "+M[new Date().getMonth()]+"</div><div class=\"row\" style=\"margin-top:14px\"><button class=\"btn2\" style=\"min-height:48px\" data-back>Tilbage</button><button class=\"btn\" style=\"min-height:48px;flex:1\" data-add>Tilføj til mine planter</button></div>"}
+function vHus(){var h=S.hus;function c(k,t,s){return"<label class=\"chk\"><input type=\"checkbox\" data-hus=\""+k+"\""+(h[k]?" checked":"")+"><span>"+t+(s?"<br><span class=\"mut\" style=\"font-weight:400\">"+s+"</span>":"")+"</span></label>"}
+ return profCard()+"<h2 style=\"margin-top:20px\">Husstand</h2><div class=\"mut\">Vælg, hvem der bor sammen med planterne. Så viser appen kun de advarsler, der gælder hos dig.</div><div class=\"card\">"+c("born","Små børn","Under 6 år")+c("kat","Katte")+c("hund","Hunde")+c("andre","Andre dyr","Fx kaniner, fugle, marsvin")+"</div><div class=\"mut\">Vandingsintervallerne er vejledende. Stik en finger i jorden, og vand kun, hvis den er tør i et par centimeter. Tjek også giftighed hos dyrlæge eller Giftlinjen, hvis nogen har spist af en plante.</div>"+wxCard()}
+function render(){var el=document.getElementById("app");el.innerHTML=tab=="planter"?vPlanter():tab=="tilfoej"?vTilfoej():tab=="kalender"?vKalender():vHus();
+ document.querySelectorAll("nav button").forEach(function(b){if(b.dataset.go==tab)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current");if(b.dataset.go=="planter"){var n=dueN();b.textContent=n?"Mine planter ("+n+")":"Mine planter"}})}
+document.addEventListener("click",function(e){var t=e.target.closest("button");if(!t)return;var d=t.dataset;
+ if(d.go){tab=d.go;if(tab!="tilfoej")draft=null;render();window.scrollTo(0,0)}
+ else if(d.pick!==undefined){draft={pid:+d.pick,vi:0,ai:0,lamp:false,lw:iso(new Date()),unk:false};render();window.scrollTo(0,0)}
+ else if(d.back!==undefined){draft=null;render()}
+ else if(d.add!==undefined){S.plants.push({id:Date.now(),pid:draft.pid,vi:draft.vi,ai:draft.ai,lamp:draft.lamp,last:lastDate(draft),unk:!!draft.unk});save();draft=null;q="";tab="planter";render()}
+ else if(d.wet){S.plants.forEach(function(p){if(p.id==d.wet){p.last=iso(new Date());p.unk=false}});save();render()}
+ else if(d.del){S.plants=S.plants.filter(function(p){return p.id!=d.del});save();render()}
+ else if(d.cal){calM.m+=+d.cal;if(calM.m<0){calM.m=11;calM.y--}if(calM.m>11){calM.m=0;calM.y++}calD=calM.y+'-'+('0'+(calM.m+1)).slice(-2)+'-01';render()}
+ else if(d.day){calD=d.day;render()}
+ else if(d.auth){authAct(d.auth)}
+ else if(d.loc){locAct(d.loc)}
+ else if(d.tc){tcat=d.tc;q='';render()}
+ else if(d.f){S.f=d.f=='all'?'':d.f;save();render()}
+ else if(d.sort){S.sort=d.sort;save();render()}
+ else if(d.notif!==undefined){askNotif()}});
+document.addEventListener("change",function(e){var t=e.target;
+ if(t.id=="vi"){draft.vi=+t.value;render()}else if(t.id=="ai"){draft.ai=+t.value;render()}else if(t.id=="lamp"){draft.lamp=t.checked;render()}else if(t.id=="lw"){draft.lw=t.value||iso(new Date());render()}else if(t.id=="unk"){draft.unk=t.checked;render()}
+ else if(t.dataset.hus){S.hus[t.dataset.hus]=t.checked;save()}});
+document.addEventListener("input",function(e){if(e.target.id=="q"){q=e.target.value;document.getElementById("lst").innerHTML=listHtml()}});
+var FG=['Gummitræ','Dieffenbachia','Drageblod','Amaryllis','Cyclamen','Pelargonium','Citrontræ'],FM={or:'or',tr:'kn',hg:'kn',fi:'tp',bg:'ba',pa:'ba',ca:'ba',bl:'bl',br:'bl'};
+function sv(a,b){return '<svg class="fig" viewBox="0 0 320 200" role="img" aria-label="'+a+'">'+b+'</svg>'}
+function T(x,y,t){return '<text class="tx" x="'+x+'" y="'+y+'" text-anchor="middle">'+t+'</text>'}
+function kn(a,b){return sv('Tegning af, hvor man klipper en stilk lige over en bladknude','<path class="g gh" d="M160 66L160 24"/><path class="g" d="M160 160L160 66"/><ellipse class="lf" cx="132" cy="112" rx="24" ry="9" transform="rotate(-30 132 112)"/><ellipse class="lf" cx="188" cy="112" rx="24" ry="9" transform="rotate(30 188 112)"/><ellipse class="lf" cx="134" cy="82" rx="22" ry="8" transform="rotate(-35 134 82)"/><ellipse class="lf" cx="186" cy="82" rx="22" ry="8" transform="rotate(35 186 82)"/><circle class="nd" cx="160" cy="112" r="4"/><circle class="nd" cx="160" cy="80" r="4"/><line class="cut" x1="138" y1="68" x2="182" y2="68"/><text class="ct" x="190" y="66">Klip her</text><text class="tx" x="172" y="34">fjernes</text>'+T(160,180,a)+T(160,195,b))}
+function fig(i){var x=P[i][7]||{},k=FM[P[i][6]];if(FN[P[i][0]])return pr(FN[P[i][0]]);if(!k||(x.k&&FG.indexOf(P[i][0])<0))return '';
+if(k=='or')return sv('Tegning af, hvor man klipper stilken på en orkidé','<rect class="pt" x="55" y="125" width="50" height="26" rx="4"/><ellipse class="lf" cx="80" cy="122" rx="38" ry="7"/><path class="g" d="M80 122C78 100 92 70 84 30"/><circle class="nd" cx="79" cy="104" r="3.5"/><circle class="nd" cx="86" cy="76" r="3.5"/><circle class="nd" cx="86" cy="52" r="3.5"/><circle class="nd" cx="84" cy="28" r="5" opacity=".5"/><circle class="nd" cx="95" cy="40" r="5" opacity=".5"/><line class="cut" x1="64" y1="68" x2="108" y2="68"/><text class="ct" x="112" y="72">Klip</text>'+T(80,172,'Grøn stilk:')+T(80,187,'klip over 2. knæk')+'<g transform="translate(160 0)"><rect class="pt" x="55" y="125" width="50" height="26" rx="4"/><ellipse class="lf" cx="80" cy="122" rx="38" ry="7"/><path class="br" d="M80 122L80 34"/><line class="cut" x1="62" y1="112" x2="98" y2="112"/><text class="ct" x="102" y="116">Klip</text>'+T(80,172,'Brun stilk:')+T(80,187,'klip helt ned ved bunden')+'</g>');
+if(k=='kn')return kn('Klip ca. 1 cm over en bladknude','nye skud kommer ud fra knuden');
+if(k=='tp')return kn('Klip toppen af, lige over en bladknude','nye skud kommer under snittet');
+if(k=='bl')return sv('Tegning af, hvor man klipper en afblomstret stilk','<ellipse class="lf" cx="130" cy="140" rx="34" ry="10" transform="rotate(-15 130 140)"/><ellipse class="lf" cx="190" cy="140" rx="34" ry="10" transform="rotate(15 190 140)"/><path class="g" d="M160 144C160 110 164 80 160 50"/><circle cx="160" cy="44" r="14" fill="var(--mut)" opacity=".5"/><line class="cut" x1="144" y1="128" x2="176" y2="128"/><text class="ct" x="182" y="126">Klip her</text>'+T(160,180,'Visne blomster:')+T(160,195,'klip stilken helt ned'));
+return sv('Tegning af, hvor man klipper et gammelt blad ved bunden','<rect class="pt" x="125" y="142" width="70" height="28" rx="4"/><path class="g" d="M154 142C130 112 112 82 104 52"/><path class="g" d="M168 142C190 112 208 82 216 52"/><path class="br" d="M161 142C159 112 161 82 163 44"/><line class="cut" x1="146" y1="134" x2="176" y2="134"/><text class="ct" x="200" y="152">Klip nederst</text>'+T(160,185,'Gamle, brune blade: klip helt')+T(160,198,'ned ved bunden'))}
+function sortBar(){function b(k,t){var on=(S.sort=='vand')==(k=='vand');return '<button class="'+(on?'btn':'btn2')+'" style="min-height:44px" data-sort="'+k+'" aria-pressed="'+on+'">'+t+'</button>'}return '<div class="row" style="margin:4px 0"><span class="mut">Sortér efter</span><div style="display:flex;gap:6px">'+b('abc','A–Å')+b('vand','Vanding')+'</div></div>'+fbar()}
+var tcat='s',STED=[['Sol',.85],['Halvskygge',1],['Skygge',1.25]],POT=[['I potte eller kasse',1],['I bed eller jorden',1.8]],CATN={s:'Stueplanter',u:'Udendørs',d:'Drivhus'};
+function cat(i){return P[i][8]||'s'}
+function loc(p){return cat(p.pid)=='s'?VIND[p.vi][0]+(p.vi<4?'vendt vindue':'')+', '+AFST[p.ai][0].toLowerCase():STED[p.vi][0]+', '+POT[p.ai][0].toLowerCase()}
+function ev(n){return n==1?'hver dag':'hver '+n+'. dag'}
+function sea2(c,m){var a=c=='u'?[5,2.5,1.6]:[4,2,1.3];return(m>=10||m<=1)?a[0]:(m==2||m==9)?a[1]:(m==3||m==8)?a[2]:1}
+function catBar(){return '<div style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0">'+['s','u','d'].map(function(k){var on=tcat==k;return '<button class="'+(on?'btn':'btn2')+'" style="min-height:44px" data-tc="'+k+'" aria-pressed="'+on+'">'+CATN[k]+'</button>'}).join('')+'</div>'}
+function fbar(){return '<div style="display:flex;gap:6px;flex-wrap:wrap;margin:6px 0">'+['','s','u','d'].map(function(k){var on=(S.f||'')==k;return '<button class="'+(on?'btn':'btn2')+'" style="min-height:40px;padding:0 12px" data-f="'+(k||'all')+'" aria-pressed="'+on+'">'+(k?CATN[k]:'Alle')+'</button>'}).join('')+'</div>'}
+function placeForm(d){return cat(d.pid)=='s'?'<label>Vinduet vender mod<select id="vi">'+opts(VIND,d.vi)+'</select></label><label>Afstand fra vinduet<select id="ai">'+opts(AFST,d.ai)+'</select></label><label class="chk"><input type="checkbox" id="lamp"'+(d.lamp?' checked':'')+'>Jeg har en plantelampe</label>':'<label>Sted<select id="vi">'+opts(STED,d.vi)+'</select></label><label>Plantet<select id="ai">'+opts(POT,d.ai)+'</select></label>'}
+var W=null,WE=0,LE='',FN={'Rose':'rose','Hindbær':'hind','Ribs':'ribs','Blåbær':'ribs','Æbletræ':'ebl'};
+function effLast(p){var l=p.last;if(cat(p.pid)!='u'||!W)return l;var th=p.ai==1?5:8,td=iso(new Date());W.days.forEach(function(x){if(x.d<=td&&x.r>=th&&x.d>l)l=x.d});return l}
+function wxNote(p){var c=cat(p.pid);if(c=='s'||!W)return '';var td=iso(new Date()),t2=new Date();t2.setDate(t2.getDate()+1);var tm=iso(t2),r=0,hot=0,o='';W.days.forEach(function(x){if(x.d==td||x.d==tm){r+=x.r;if(x.t>=28)hot=Math.round(x.t)}});var el=effLast(p);if(c=='u'&&el!=p.last){var b=el.split('-');o+='<div class="ok">Regn den '+(+b[2])+'. '+M[+b[1]-1]+' tæller som vanding.</div>'}if(c=='u'&&r>=5&&rel(p)<=1)o+='<div class="ok">Der ventes ca. '+Math.round(r)+' mm regn i dag eller i morgen. Vent med at vande.</div>';if(hot)o+='<div class="warn">Varmt ('+hot+'°). Tjek jorden, den kan have brug for vand før.</div>';return o}
+function wxStrip(){if(!S.plants.some(function(p){return cat(p.pid)!='s'}))return '';if(!S.loc)return '<div class="ok" style="margin:8px 0">Slå vejret til under Husstand, så regn tæller med i vandingen af udendørs- og drivhusplanter.</div>';if(!W)return '';var td=iso(new Date()),t2=new Date();t2.setDate(t2.getDate()+1);var tm=iso(t2),a='',b='';W.days.forEach(function(x){if(x.d==td)a=Math.round(x.r);if(x.d==tm)b=Math.round(x.r)});return '<div class="ok" style="margin:8px 0">Regn i dag: '+a+' mm. I morgen: '+b+' mm.</div>'}
+function wxFetch(){WE=0;if(!S.loc)return;var k=S.loc.lat+','+S.loc.lon;try{var c=JSON.parse(localStorage.getItem('wx')||'null');if(c&&c.k==k&&Date.now()-c.at<108e5){W=c.w;render();return}}catch(e){}
+try{fetch('https://api.open-meteo.com/v1/forecast?latitude='+S.loc.lat+'&longitude='+S.loc.lon+'&daily=precipitation_sum,temperature_2m_max&past_days=3&forecast_days=3&timezone=auto').then(function(r){return r.json()}).then(function(j){var d=j.daily;W={days:d.time.map(function(t,i){return{d:t,r:d.precipitation_sum[i]||0,t:d.temperature_2m_max[i]}})};try{localStorage.setItem('wx',JSON.stringify({k:k,at:Date.now(),w:W}))}catch(e){}render()}).catch(function(){WE=1;render()})}catch(e){WE=1}}
+function locAct(a){LE='';if(a=='clear'){S.loc=null;W=null;save();try{localStorage.removeItem('wx')}catch(e){}render();return}
+if(a=='geo'){if(!navigator.geolocation){LE='Din browser kan ikke finde din placering.';render();return}navigator.geolocation.getCurrentPosition(function(p){S.loc={lat:+p.coords.latitude.toFixed(2),lon:+p.coords.longitude.toFixed(2),name:'Din placering'};save();wxFetch();render()},function(){LE='Kunne ikke finde din placering. Skriv en by i stedet.';render()});return}
+if(a=='city'){var v=(document.getElementById('city')||{}).value;if(!v)return;try{fetch('https://geocoding-api.open-meteo.com/v1/search?name='+encodeURIComponent(v)+'&count=1&language=da').then(function(r){return r.json()}).then(function(j){var r=j.results&&j.results[0];if(!r){LE='Fandt ikke byen.';render();return}S.loc={lat:+r.latitude.toFixed(2),lon:+r.longitude.toFixed(2),name:r.name+(r.country?', '+r.country:'')};save();wxFetch();render()}).catch(function(){LE='Kunne ikke søge. Det virker ikke i forhåndsvisning i Claude, men på din egen adresse.';render()})}catch(e){}}}
+function wxCard(){var h='<div class="card"><h2>Vejr og regn</h2><div class="mut">Til udendørs- og drivhusplanter. Appen henter regn og temperatur fra Open-Meteo og tæller regn med i vandingen.</div>';
+if(S.loc){h+='<div><b>'+S.loc.name+'</b></div>';if(W){var td=iso(new Date());h+='<div class="mut">'+W.days.filter(function(x){return x.d>=td}).map(function(x){var a=x.d.split('-');return a[2]+'/'+a[1]+': '+Math.round(x.r)+' mm, '+Math.round(x.t)+'°'}).join(' · ')+'</div>'}else h+='<div class="mut">'+(WE?'Kunne ikke hente vejret. Det virker ikke i forhåndsvisning i Claude, men på din egen adresse.':'Henter vejret...')+'</div>';h+='<button class="btn2" style="min-height:44px" data-loc="clear">Fjern placering</button>'}
+else{h+='<button class="btn" style="min-height:48px" data-loc="geo">Brug min placering</button><label>Eller skriv en by<input type="search" id="city" placeholder="fx Roskilde"></label><button class="btn2" style="min-height:44px" data-loc="city">Find by</button>'+(LE?'<div class="warn">'+LE+'</div>':'')}
+return h+'<div class="mut">Placeringen gemmes kun i din browser og afrundes til ca. 1 km.</div></div>'}
+function pr(k){var G='<line class="pt" x1="40" y1="160" x2="280" y2="160"/>';
+if(k=='rose')return sv('Tegning af, hvor man klipper en rose',G+'<path class="br" d="M105 160L98 70"/><line class="cut" x1="92" y1="148" x2="118" y2="148"/><text class="ct" x="44" y="146">Fjern</text><path class="g gh" d="M170 80L170 36"/><path class="g" d="M170 160L170 84"/><circle class="nd" cx="170" cy="100" r="4"/><ellipse class="lf" cx="186" cy="96" rx="13" ry="5" transform="rotate(-30 186 96)"/><ellipse class="lf" cx="152" cy="124" rx="13" ry="5" transform="rotate(25 152 124)"/><line class="cut" x1="158" y1="90" x2="182" y2="78"/><text class="ct" x="196" y="76">Klip her</text><text class="tx" x="196" y="90">(skåt)</text>'+T(160,180,'Klip 0,5 cm over en knop, der peger udad.')+T(160,195,'Fjern døde og krydsende grene helt ned.'));
+if(k=='hind')return sv('Tegning af, hvilke hindbærskud man klipper ned',G+'<path class="br" d="M98 160L92 60"/><path class="br" d="M118 160L112 70"/><line class="cut" x1="84" y1="150" x2="128" y2="150"/><text class="ct" x="44" y="146">Klip</text><text class="tx" x="105" y="46" text-anchor="middle">Gamle</text><path class="g" d="M200 160C204 120 196 90 206 50"/><path class="g" d="M228 160C226 120 236 90 232 56"/><ellipse class="lf" cx="190" cy="110" rx="14" ry="6" transform="rotate(-35 190 110)"/><ellipse class="lf" cx="244" cy="100" rx="14" ry="6" transform="rotate(35 244 100)"/><text class="tx" x="218" y="40" text-anchor="middle">Nye</text>'+T(160,180,'Gamle, brune skud: klip helt ned efter høst.')+T(160,195,'Lad de nye, grønne skud stå.'));
+if(k=='ribs')return sv('Tegning af, hvilke grene man klipper ned på en bærbusk',G+'<path class="br" style="stroke-width:7" d="M140 160C130 120 110 90 100 50"/><line class="cut" x1="122" y1="150" x2="158" y2="150"/><text class="ct" x="44" y="146">Klip</text><text class="tx" x="100" y="42" text-anchor="middle">Ældst</text><path class="g" d="M165 160C168 120 175 90 180 40"/><path class="g" d="M180 160C190 125 210 100 232 62"/><path class="g" d="M195 160C215 135 245 118 264 96"/><ellipse class="lf" cx="170" cy="100" rx="12" ry="5" transform="rotate(-60 170 100)"/><ellipse class="lf" cx="214" cy="92" rx="12" ry="5" transform="rotate(-40 214 92)"/>'+T(160,180,'Klip de ældste, mørke grene helt ned ved jorden,')+T(160,195,'så der kommer lys og luft ind i busken.'));
+return sv('Tegning af, hvor man klipper et frugttræ','<line class="pt" x1="40" y1="170" x2="280" y2="170"/><path class="br" style="stroke-width:6" d="M160 170L160 110"/><path class="br" d="M160 110C140 90 110 70 90 50"/><path class="br" d="M160 110C180 90 210 70 230 50"/><path class="g" d="M205 76L205 28"/><line class="cut" x1="193" y1="70" x2="217" y2="70"/><text class="ct" x="226" y="90">Vandskud</text>'+T(160,183,'Fjern lodrette vandskud helt nede ved grenen,')+T(160,196,'så kronen er åben og luftig.'))}
+var SBU='https://oayhsafogtfksleswgxo.supabase.co',SBK='sb_publishable_LY0ZNuvjC6-97fmIgnrXcQ_z_ZJp8-0';
+var sb=null,U=null,AM='',EMV='',RC=0,PT=null;
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function em2(e){var m=(e&&e.message||'').toLowerCase();if(m.indexOf('invalid login')>-1)return 'Forkert e-mail eller adgangskode.';if(m.indexOf('already')>-1)return 'Der findes allerede en profil med den e-mail.';if(m.indexOf('password')>-1)return 'Adgangskoden er for svag. Brug mindst 8 tegn.';if(m.indexOf('confirm')>-1)return 'Bekræft først din e-mail via linket, vi har sendt.';if(m.indexOf('rate')>-1)return 'For mange forsøg. Vent lidt, og prøv igen.';return 'Noget gik galt. Prøv igen.'}
+function clearLocal(){S.plants=[];S.hus={born:false,kat:false,hund:false,andre:false};S.sort='';S.f='';lsSave()}
+function push(){if(!sb||!U)return;sb.from('plantedata').upsert({user_id:U.id,data:{plants:S.plants,hus:S.hus,sort:S.sort||'',f:S.f||''},updated_at:new Date().toISOString()}).then(function(r){if(r.error){AM='Kunne ikke gemme på din profil. Tjek forbindelsen.';if(tab=='hus')render()}})}
+function pushSoon(){clearTimeout(PT);PT=setTimeout(push,800)}
+function pull(merge){sb.from('plantedata').select('data').eq('user_id',U.id).maybeSingle().then(function(r){if(r.error){AM='Kunne ikke hente dine planter.';render();return}var d=r.data&&r.data.data;if(d&&d.plants&&d.plants.length){var m=d.plants.slice();if(merge)S.plants.forEach(function(p){if(!d.plants.some(function(q){return q.id==p.id}))m.push(p)});var more=m.length!=d.plants.length;S.plants=m;if(d.hus)S.hus=d.hus;S.sort=d.sort||'';S.f=d.f||'';lsSave();if(more)push()}else push();render()})}
+function sbInit(){if(!SBU||!SBK||!window.supabase)return;sb=window.supabase.createClient(SBU,SBK);sb.auth.onAuthStateChange(function(ev,ses){var n=ses&&ses.user||null;if(ev=='PASSWORD_RECOVERY'){RC=1;tab='hus'}if(n&&(!U||U.id!=n.id)){U=n;pull(ev=='SIGNED_IN')}else if(!n&&U){U=null}render()})}
+function authAct(a){if(!sb)return;var e1=document.getElementById('em'),p1=document.getElementById('pw'),np=document.getElementById('npw'),em=(e1&&e1.value)||EMV,pw=(p1&&p1.value)||'';EMV=em;AM='';
+if(a=='out'){sb.auth.signOut().then(function(){clearLocal();render()});return}
+if(a=='del'){if(!confirm('Slet din profil og alle dine gemte planter? Det kan ikke fortrydes.'))return;sb.rpc('delete_user').then(function(r){if(r.error){AM='Kunne ikke slette profilen. Prøv igen.';render();return}sb.auth.signOut().then(function(){clearLocal();AM='Din profil er slettet.';render()})});return}
+if(a=='newpw'){var v=np&&np.value;if(!v||v.length<8){AM='Brug mindst 8 tegn.';render();return}sb.auth.updateUser({password:v}).then(function(r){if(r.error)AM=em2(r.error);else{RC=0;AM='Adgangskoden er ændret.'}render()});return}
+if(!em){AM='Skriv din e-mail.';render();return}
+if(a=='reset'){sb.auth.resetPasswordForEmail(em,{redirectTo:location.origin+location.pathname}).then(function(r){AM=r.error?em2(r.error):'Hvis e-mailen findes, har vi sendt et link til at vælge en ny adgangskode.';render()});return}
+if(!pw){AM='Skriv din adgangskode.';render();return}
+if(a=='up'){sb.auth.signUp({email:em,password:pw}).then(function(r){if(r.error)AM=em2(r.error);else if(!r.data.session)AM='Tjek din e-mail, og tryk på linket for at bekræfte din profil. Log derefter ind.';render()});return}
+sb.auth.signInWithPassword({email:em,password:pw}).then(function(r){if(r.error)AM=em2(r.error);render()})}
+function profCard(){var h='<h1>Profil</h1><div class="card"><h2>Gem dine planter</h2>';
+if(!SBU)return h+'<div class="mut">Profiler er ikke slået til endnu. Dine planter gemmes kun på denne enhed.</div></div>';
+if(RC)return h+'<div class="mut">Vælg en ny adgangskode.</div><label>Ny adgangskode<input type="password" id="npw" autocomplete="new-password"></label>'+(AM?'<div class="warn">'+AM+'</div>':'')+'<button class="btn" style="min-height:48px" data-auth="newpw">Gem adgangskode</button></div>';
+if(U)return h+'<div>Logget ind som <b>'+esc(U.email)+'</b></div><div class="mut">Dine planter gemmes på din profil og følger med til alle dine enheder. Hvis du logger ud, ryddes de fra denne enhed.</div>'+(AM?'<div class="ok">'+AM+'</div>':'')+'<div class="row"><button class="btn2" style="min-height:44px" data-auth="out">Log ud</button><button class="lnk" data-auth="del">Slet min profil</button></div></div>';
+return h+'<div class="mut">Opret en profil for at gemme dine planter og bruge dem på flere enheder. Du kan også bruge appen uden profil.</div><label>E-mail<input type="email" id="em" autocomplete="email" value="'+esc(EMV)+'"></label><label>Adgangskode<input type="password" id="pw" autocomplete="current-password"></label>'+(AM?'<div class="warn">'+AM+'</div>':'')+'<div class="row"><button class="btn" style="min-height:48px;flex:1" data-auth="in">Log ind</button><button class="btn2" style="min-height:48px;flex:1" data-auth="up">Opret profil</button></div><button class="lnk" data-auth="reset">Glemt adgangskode</button><div class="mut">Vi gemmer kun din e-mail og dine planter. Du kan altid slette din profil her.</div></div>'}
+function lastForm(d){var td=iso(new Date());return '<div class="card"><label>Sidst vandet<input type="date" id="lw" max="'+td+'" value="'+(d.lw||td)+'"'+(d.unk?' disabled':'')+'></label><label class="chk"><input type="checkbox" id="unk"'+(d.unk?' checked':'')+'>Jeg ved ikke</label></div>'}
+function lastDate(d){var td=iso(new Date());if(d.unk){var n=days(d.pid,d.vi,d.ai,d.lamp),t=day0();t.setDate(t.getDate()-n);return iso(t)}var v=d.lw||td;return v>td?td:v}
+function unkNote(p){return p.unk?'<div class="ok">Du ved ikke, hvornår den sidst blev vandet. Stik en finger i jorden, og vand kun, hvis den er tør.</div>':''}
+var calM=null,calD=null;
+function dueN(){return S.plants.filter(function(p){return rel(p)<=0}).length}
+function plantMap(y,m){var map={},end=new Date(y,m+1,0),t0=day0();S.plants.forEach(function(p){var n=days(p.pid,p.vi,p.ai,p.lamp),t=day0(effLast(p));t.setDate(t.getDate()+n);if(t<t0)t=new Date(t0);while(t<=end){var k=iso(t);(map[k]=map[k]||[]).push(p);t=new Date(t);t.setDate(t.getDate()+n)}});return map}
+function vKalender(){var now=new Date();if(!calM)calM={y:now.getFullYear(),m:now.getMonth()};if(!calD)calD=iso(now);var y=calM.y,m=calM.m,map=plantMap(y,m),first=(new Date(y,m,1).getDay()+6)%7,dim=new Date(y,m+1,0).getDate(),today=iso(now);
+var h='<h1>Kalender</h1><div class="row"><button class="btn2" style="min-height:44px;min-width:48px" data-cal="-1" aria-label="Forrige måned">‹</button><h2>'+M[m]+' '+y+'</h2><button class="btn2" style="min-height:44px;min-width:48px" data-cal="1" aria-label="Næste måned">›</button></div><div class="cal">';
+['Man','Tir','Ons','Tor','Fre','Lør','Søn'].forEach(function(w){h+='<div class="cw">'+w+'</div>'});
+for(var i=0;i<first;i++)h+='<div></div>';
+for(var d=1;d<=dim;d++){var k=y+'-'+('0'+(m+1)).slice(-2)+'-'+('0'+d).slice(-2),c=(map[k]||[]).length;h+='<button class="cd'+(k==today?' td':'')+(k==calD?' sel':'')+'" data-day="'+k+'" aria-label="'+d+'. '+M[m]+(c?', '+c+(c==1?' plante':' planter')+' skal vandes':'')+'">'+d+(c?'<span class="dt">'+c+'</span>':'')+'</button>'}
+h+='</div>';var a=calD.split('-'),dt=new Date(+a[0],+a[1]-1,+a[2]),L=map[calD]||[];
+h+='<div class="card"><h2>'+dt.getDate()+'. '+M[dt.getMonth()]+'</h2>';if(!L.length)h+='<div class="mut">Ingen planter skal vandes denne dag</div>';
+L.forEach(function(p){h+='<div class="row"><span><b>'+P[p.pid][0]+'</b><br><span class="mut">'+loc(p)+'</span></span>'+(calD<=today?'<button class="btn" style="min-height:44px" data-wet="'+p.id+'">Vandet</button>':'')+'</div>'});h+='</div>';
+var ns,nb='';if(!('Notification' in window))ns='Din browser understøtter ikke notifikationer her.';else if(Notification.permission=='granted')ns='Slået til. Du får en besked, når du åbner appen, og planter skal have vand.';else if(Notification.permission=='denied')ns='Blokeret i browseren. Tillad notifikationer for siden i browserens indstillinger.';else{ns='Få en besked, når du åbner appen, og planter skal have vand.';nb='<button class="btn" style="min-height:48px" data-notif>Slå notifikationer til</button>'}
+h+='<div class="card"><h2>Påmindelser</h2><div class="mut">'+ns+'</div>'+nb+'<div class="mut">Beskeder vises kun, mens appen er åben. Datoerne i kalenderen er forventede ud fra årstiden nu.</div></div>';return h}
+function askNotif(){try{Notification.requestPermission().then(function(){render();notify()})}catch(e){render()}}
+function notify(){try{if(!('Notification' in window)||Notification.permission!='granted')return;var n=dueN();if(!n)return;var k='sn'+iso(new Date());if(localStorage.getItem(k))return;localStorage.setItem(k,'1');new Notification('Grønthus',{body:n+(n==1?' plante skal':' planter skal')+' have vand i dag'})}catch(e){}}
+document.addEventListener('visibilitychange',function(){if(!document.hidden){render();notify()}});
+render();notify();wxFetch();sbInit();
+</script>
+</body>
+</html>
