@@ -42,13 +42,16 @@ tr:last-child td{border-bottom:0}
 <li>Vi gemmer kun din e-mail og dine planter, hvis du opretter en profil.</li>
 <li>Vi viser ingen reklamer, sælger ingen data og bruger ingen statistik- eller sporingsværktøjer.</li>
 <li>Du kan slette din profil og alle dine data selv i appen, under Profil.</li>
+<li>Billeder, du scanner for at finde en plantes navn, sendes kun til Pl@ntNet og gemmes ikke hos os.</li>
 </ul>
 </div>
 
 <h2>1. Hvem er ansvarlig for dine oplysninger?</h2>
 <p>Grønthus drives af:</p>
-<p>Grønthus<br>
-Skovbrynet 5, 4293 Dianalund<br>
+<p><span class="fill">[Dit navn eller virksomhedsnavn]</span><br>
+<span class="fill">[Adresse]</span>, <span class="fill">[Postnummer og by]</span><br>
+E-mail: <span class="fill">[din e-mail]</span><br>
+CVR: <span class="fill">[CVR-nummer, hvis du har et]</span></p>
 <p>Vi er dataansvarlige for de oplysninger, der behandles i appen.</p>
 
 <h2>2. Hvilke oplysninger behandler vi, og hvorfor?</h2>
@@ -60,10 +63,11 @@ Skovbrynet 5, 4293 Dianalund<br>
 <tr><td><b>Husstand:</b> om der bor små børn, katte, hunde eller andre dyr hos dig.</td><td>At vise de giftighedsadvarsler, der gælder hos dig.</td><td>Opfyldelse af aftalen med dig (art. 6, stk. 1, litra b).</td></tr>
 <tr><td><b>Placering til vejret (valgfri):</b> din omtrentlige placering, afrundet til ca. 1 km, eller navnet på en by.</td><td>At hente regn og temperatur, så din vandingsplan kan tage højde for vejret.</td><td>Dit samtykke (art. 6, stk. 1, litra a). Du kan trække det tilbage ved at fjerne placeringen under Profil.</td></tr>
 <tr><td><b>Notifikationer (valgfri):</b> din tilladelse til at vise beskeder i browseren.</td><td>At minde dig om at vande, når du åbner appen.</td><td>Dit samtykke via browserens tilladelse (art. 6, stk. 1, litra a). Beskederne oprettes i din browser, og vi modtager dem ikke.</td></tr>
+<tr><td><b>Scanning af planter (valgfri):</b> det billede, du vælger at scanne. Skjulte oplysninger i billedet, fx hvor det er taget, fjernes, og billedet gøres mindre, før det sendes.</td><td>At foreslå, hvad planten hedder.</td><td>Dit samtykke (art. 6, stk. 1, litra a), som du giver, første gang du scanner. Vi gemmer ikke billedet. Pl@ntNet behandler det efter deres egne betingelser.</td></tr>
 <tr><td><b>Tekniske oplysninger:</b> IP-adresse, browsertype og tidspunkt for besøg i hostingleverandørens serverlogs.</td><td>Drift, fejlfinding og beskyttelse mod misbrug.</td><td>Vores legitime interesse i en sikker og stabil tjeneste (art. 6, stk. 1, litra f).</td></tr>
 </tbody></table></div>
 <p>Du kan bruge appen uden at oprette en profil. Så bliver dine planter kun gemt i din egen browser og ikke hos os.</p>
-<p>Vi indsamler ikke dit navn, telefonnummer, betalingsoplysninger, billeder eller din præcise placering, og vi behandler ikke følsomme oplysninger.</p>
+<p>Vi indsamler ikke dit navn, telefonnummer, betalingsoplysninger eller din præcise placering. Vi gemmer ikke de billeder, du scanner, og vi behandler ikke følsomme oplysninger.</p>
 
 <h2>3. Hvad gemmes i din browser?</h2>
 <p>Appen bruger ikke cookies til markedsføring eller statistik. Den gemmer disse oplysninger i browserens lokale lagring, fordi de er nødvendige for, at appen virker:</p>
@@ -74,26 +78,28 @@ Skovbrynet 5, 4293 Dianalund<br>
 <tr><td>Dit login</td><td>At holde dig logget ind.</td><td>Til du logger ud eller sessionen udløber.</td></tr>
 <tr><td>Vejr</td><td>At undgå at hente vejret oftere end nødvendigt.</td><td>Højst 3 timer ad gangen.</td></tr>
 <tr><td>Markering af dagens besked</td><td>At vise højst én påmindelse om dagen.</td><td>Til du rydder browserens data.</td></tr>
+<tr><td>Dit samtykke til scanning</td><td>At huske, at du har læst, at billeder sendes til Pl@ntNet.</td><td>Til du rydder browserens data.</td></tr>
 </tbody></table></div>
 
 <h2>4. Hvem modtager dine oplysninger?</h2>
 <p>Vi bruger disse leverandører til at drive appen. De behandler oplysninger for os efter vores instruks.</p>
 <ul>
-<li><b>Supabase</b> gemmer din profil og dine planter og står for login. Databasen ligger i Frankfurt.
+<li><b>Supabase</b> gemmer din profil og dine planter og står for login. Databasen ligger i <span class="fill">[region, fx Frankfurt eller Stockholm – tjek dit Supabase-projekt]</span>.</li>
 <li><b>Netlify</b> hoster siden. De kan se din IP-adresse i serverlogs.</li>
 <li><b>jsDelivr</b> leverer det program, der håndterer login, til din browser. De kan se din IP-adresse, når siden åbnes.</li>
 <li><b>Open-Meteo</b> leverer vejrdata, men kun hvis du slår vejret til. De modtager din afrundede placering og din IP-adresse.</li>
-<li><b>GitHub</b> opbevarer sidens kode og modtager ikke dine oplysninger.
+<li><b>Pl@ntNet</b> modtager de billeder, du scanner, og din IP-adresse, men kun hvis du bruger scanningen. De sender et forslag til plantens navn tilbage. Pl@ntNet er et europæisk projekt. <span class="fill">[Læs Pl@ntNets privatlivspolitik og betingelser på my.plantnet.org, og tjek, om de gemmer eller bruger billeder, og hvor længe]</span></li>
+<li><b>GitHub</b> opbevarer sidens kode og modtager ikke dine oplysninger. <span class="fill">[Fjern dette punkt, hvis du ikke bruger GitHub]</span></li>
 </ul>
 <p>Vi sælger ikke dine oplysninger, og vi bruger ingen reklamenetværk. Vi videregiver kun oplysninger til myndigheder, hvis loven kræver det.</p>
 
 <h2>5. Overførsel til lande uden for EU og EØS</h2>
-<p>Nogle af leverandørerne er amerikanske selskaber. Overførsler sker på grundlag af EU-Kommissionens standardkontraktbestemmelser og/eller EU-U.S. Data Privacy Framework. 
+<p>Nogle af leverandørerne er amerikanske selskaber. Overførsler sker på grundlag af EU-Kommissionens standardkontraktbestemmelser og/eller EU-U.S. Data Privacy Framework. <span class="fill">[Tjek leverandørernes aktuelle databehandleraftaler, før du udgiver]</span></p>
 
 <h2>6. Hvor længe gemmer vi dine oplysninger?</h2>
 <ul>
 <li><b>Din profil og dine planter</b> gemmes, til du sletter din profil. Du kan slette den selv i appen under Profil og Slet min profil. Så slettes profil og planter med det samme fra databasen.</li>
-<li><b>Sikkerhedskopier</b> hos Supabase kan indeholde dine oplysninger i en kort periode efter sletning.
+<li><b>Sikkerhedskopier</b> hos Supabase kan indeholde dine oplysninger i en kort periode efter sletning. <span class="fill">[Tjek hvor længe hos Supabase]</span></li>
 <li><b>Serverlogs</b> hos hostingleverandøren slettes efter leverandørens faste frister.</li>
 <li><b>Data i din browser</b> ligger, til du rydder dem. Når du logger ud, ryddes dine planter fra enheden.</li>
 </ul>
@@ -109,7 +115,7 @@ Skovbrynet 5, 4293 Dianalund<br>
 <li>gøre indsigelse mod behandling, der bygger på vores legitime interesse,</li>
 <li>trække dit samtykke tilbage, når som helst.</li>
 </ul>
-<p>Du kan slette din profil selv i appen. Ellers kan du skrive til christinalangballe@gmail.com. Vi svarer senest inden for en måned.</p>
+<p>Du kan slette din profil selv i appen. Ellers kan du skrive til <span class="fill">[din e-mail]</span>. Vi svarer senest inden for en måned.</p>
 <p>Er du utilfreds med, hvordan vi behandler dine oplysninger, kan du klage til Datatilsynet på <a href="https://www.datatilsynet.dk">datatilsynet.dk</a>. Vi vil dog gerne have chancen for at løse det først.</p>
 
 <h2>8. Sikkerhed</h2>
@@ -122,7 +128,7 @@ Skovbrynet 5, 4293 Dianalund<br>
 <p>Vi kan opdatere politikken, fx hvis appen får nye funktioner. Datoen øverst viser, hvornår den sidst er ændret. Ved væsentlige ændringer giver vi besked i appen.</p>
 
 <h2>11. Kontakt</h2>
-<p>Har du spørgsmål, så skriv til christinalangballe@gmail.com<br></p>
+<p>Har du spørgsmål, så skriv til <span class="fill">[din e-mail]</span>.</p>
 </main>
 </body>
 </html>
